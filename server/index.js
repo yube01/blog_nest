@@ -1,0 +1,20 @@
+const express = require("express")
+const dotenv = require("dotenv").config()
+const mongoose = require("mongoose")
+const userRoute = require("./routes/user.route")
+
+const app = express()
+
+const url = process.env.MONGO
+
+app.use(express.json())
+
+app.use('/',userRoute)
+
+mongoose.connect(url)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.error('MongoDB connection error:', error));
+
+app.listen(9000,()=>{
+    console.log("Server started")
+})
