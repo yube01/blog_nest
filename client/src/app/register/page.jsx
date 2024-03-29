@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 // import { signIn, useSession } from "next-auth/react";
-import styles from "./loginPage.module.css";
+import styles from "./registerPage.module.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import {url} from "../../../url"
@@ -10,6 +10,7 @@ const LoginPage = () => {
 //   const { status } = useSession();
 
 const [name,setName] = useState("")
+const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
 
@@ -56,14 +57,18 @@ const handleSubmit = async(e)=>{
         value={name}
         onChange={(e) => setName(e.target.value)} 
         type="text" name="" id="" />
-
+        <input className={styles.inputBtn} 
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)} 
+        type="email" name="" id="" />
         <input className={styles.inputBtn} 
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)} 
         type="password" name="" id="" />
         <div className={styles.socialButton} onClick={handleSubmit}>
-          Login
+          Register
         </div>
 
       </div>

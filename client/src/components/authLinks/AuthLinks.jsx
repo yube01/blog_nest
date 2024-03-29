@@ -14,9 +14,10 @@ const status = "unauthenticated"
   return (
     <>
       {status === "unauthenticated" ? (
-        <Link href="/login" className={styles.link}>
-          Login
-        </Link>
+            <>
+            <Link href="/login">Login</Link>
+            <Link href="/register">Register</Link>          
+          </>
       ) : (
         <>
           <Link href="/write" className={styles.link}>
@@ -38,7 +39,11 @@ const status = "unauthenticated"
           <Link href="/">About</Link>
           <Link href="/">Contact</Link>
           {status === "notauthenticated" ? (
-            <Link href="/login">Login</Link>
+            <>
+              <Link href="/login">Login</Link>
+              <Link href="/register">Register</Link>          
+            </>
+
           ) : (
             <>
               <Link href="/write">Write</Link>
