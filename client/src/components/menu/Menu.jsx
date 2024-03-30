@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./menu.module.css";
+import styles from "./menuss.module.css";
 
 import MenuPosts from "../menuPosts/MenuPosts";
 import MenuCategories from "../menuCatagories/MenuCategories";

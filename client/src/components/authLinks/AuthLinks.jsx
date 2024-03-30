@@ -1,19 +1,39 @@
 "use client";
 import Link from "next/link";
 import styles from "./authLinks.module.css";
-import { useState } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { useContext, useEffect, useState } from "react";
+import { signOut } from "next-auth/react";
+import { AuthContext } from "@/context/AuthContext";
 
 const AuthLinks = () => {
   const [open, setOpen] = useState(false);
 
-//   const { status } = useSession();
 
-const status = "unauthenticated"
+  const { status,setStatus } = useContext(AuthContext);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    // Update status in localStorage
+    localStorage.setItem("status", "unauthenticated");
+    // Update status in component state
+    setStatus("unauthenticated");
+  }
+
+  useEffect(() => {
+    // Check if status is null or undefined
+    if (status === null || status === undefined) {
+      // Set default status in localStorage and component state
+      localStorage.setItem("status", "unauthenticated");
+      setStatus("unauthenticated");
+    } else {
+      // Retrieve status from localStorage and update component state
+      setStatus(localStorage.getItem("status"));
+    }
+  }, [status]); 
 
   return (
     <>
-      {status === "unauthenticated" ? (
+      {status === "unauthenticated"  ? (
             <>
             <Link href="/login">Login</Link>
             <Link href="/register">Register</Link>          
@@ -23,7 +43,7 @@ const status = "unauthenticated"
           <Link href="/write" className={styles.link}>
             Write
           </Link>
-          <span className={styles.link} onClick={signOut}>
+          <span className={styles.link} onClick={handleLogout}>
             Logout
           </span>
         </>
@@ -38,7 +58,7 @@ const status = "unauthenticated"
           <Link href="/">Homepage</Link>
           <Link href="/">About</Link>
           <Link href="/">Contact</Link>
-          {status === "notauthenticated" ? (
+          {status === "unauthenticated" ? (
             <>
               <Link href="/login">Login</Link>
               <Link href="/register">Register</Link>          
@@ -47,7 +67,7 @@ const status = "unauthenticated"
           ) : (
             <>
               <Link href="/write">Write</Link>
-              <span className={styles.link}>Logout</span>
+              <span className={styles.link} onClick={handleLogout}>Logout</span>
             </>
           )}
         </div>

@@ -23,7 +23,12 @@ const createUser = async(req,res)=>{
     const user = await User.create(userObject)
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${name} created` })
+        res.status(201).json({ 
+            message: `New user ${name} created` ,
+            register :'ok'
+
+    
+    })
     } else {
         res.status(400).json({ message: 'Invalid user data received' })
     }
@@ -32,11 +37,11 @@ const createUser = async(req,res)=>{
 
 const login = async(req,res)=>{
 
-    const {email,password} = req.body
+    const {name,password} = req.body
 
     try {
  
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ name });
 
    
         if (!user) {
@@ -55,7 +60,10 @@ const login = async(req,res)=>{
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         
-        res.status(200).json({token});
+        res.status(200).json({
+            login:'ok',
+            token
+        });
     } catch (error) {
         console.error("Error logging in:", error);
         res.status(500).json({ message: "Internal server error" });

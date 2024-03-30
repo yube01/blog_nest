@@ -1,13 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 // import { signIn, useSession } from "next-auth/react";
 import styles from "./loginPage.module.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import {url} from "../../../url"
+import { AuthContext } from "@/context/AuthContext";
 
 const LoginPage = () => {
 //   const { status } = useSession();
+
+const { setStatus } = useContext(AuthContext);
+
+  const router = useRouter();
 
 const [name,setName] = useState("")
 const [password, setPassword] = useState("");
@@ -16,20 +21,24 @@ const [password, setPassword] = useState("");
 const handleSubmit = async(e)=>{
 
   e.preventDefault();
-  if (email.length === 0 && password.length === 0) {
+  if (password.length === 0) {
     console.log("empty")  
   }
 
   try {
     const response = await axios.post(
-      url+"create",
+      url+"login",
       {
         name,
-        email,
         password,
       }
     );
-    console.log(response)
+    console.log(response.data.login)
+    if(response.data.login==='ok'){
+      localStorage.setItem("status", "authenticated");
+      setStatus("authenticated");
+      router.push("/")
+    }
   } catch (error) {
     console.log(error)
     
@@ -38,7 +47,7 @@ const handleSubmit = async(e)=>{
 }
   
 
-//   const router = useRouter();
+
 
 //   if (status === "loading") {
 //     return <div className={styles.loading}>Loading...</div>;

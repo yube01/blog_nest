@@ -8,6 +8,7 @@ import {url} from "../../../url"
 
 const LoginPage = () => {
 //   const { status } = useSession();
+  const router = useRouter();
 
 const [name,setName] = useState("")
 const [email, setEmail] = useState("");
@@ -30,7 +31,10 @@ const handleSubmit = async(e)=>{
         password,
       }
     );
-    console.log(response)
+    console.log(response.data.register)
+    if(response.data.register==='ok'){
+      router.push("/login")
+    }
   } catch (error) {
     console.log(error)
     
@@ -39,7 +43,7 @@ const handleSubmit = async(e)=>{
 }
   
 
-//   const router = useRouter();
+
 
 //   if (status === "loading") {
 //     return <div className={styles.loading}>Loading...</div>;
