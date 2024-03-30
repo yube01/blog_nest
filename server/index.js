@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config()
 const mongoose = require("mongoose")
 const userRoute = require("./routes/user.route")
 const categoryRoute  = require("./routes/category.route")
+const post = require("./routes/post.route")
 const cors = require("cors")
 
 const app = express()
@@ -17,6 +18,7 @@ app.use(express.json())
 
 app.use('/',userRoute)
 app.use('/',categoryRoute)
+app.use('/',post)
 
 mongoose.connect(url)
   .then(() => console.log('Connected to MongoDB'))
@@ -25,3 +27,4 @@ mongoose.connect(url)
 app.listen(9000,()=>{
     console.log("Server started")
 })
+
