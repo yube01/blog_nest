@@ -1,26 +1,26 @@
 import React from "react";
-import styles from "./cardList.module.css";
+import styles from "./post.module.css";
 // import Pagination from "../pagination/Pagination";
 import Image from "next/image";
-import {recent} from "../../../url"
-import Card from "../card/Card";
+import {allPost} from "../../../url"
+import Card from "@/components/card/Card";
+
 
 const getData = async () => {
-
-    const res = await fetch(recent+`?slug=initial`,{
+  const res = await fetch(allPost,{
       cache: "no-store",
     }
   );
+
   if (!res.ok) {
     throw new Error("Failed");
   }
-  return res.json();
 
+  return res.json();
 };
 
 const CardList = async () => {
   const data = await getData();
- 
 
   return (
     <div className={styles.container}>

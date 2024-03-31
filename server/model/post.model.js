@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
-
+  slug:{type:String,unique:true},
   title: { type: String },
   desc: { type: String },
   img: { type: String },
