@@ -26,6 +26,22 @@ const allPost = async (req, res) => {
   }
 };
 
+
+const singlePost = async(req,res)=>{
+
+  const id = req.params.id
+
+
+  try {
+    const post = await Posts.findOne({_id:id});
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+  }
+  
+}
+
 const getPost = async (req, res) => {
   try {
     const { title, desc, slug } = req.body;
@@ -47,4 +63,5 @@ module.exports = {
   getPost,
   recentPost,
   allPost,
+  singlePost
 };

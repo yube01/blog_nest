@@ -33,9 +33,10 @@ const handleSubmit = async(e)=>{
         password,
       }
     );
-    console.log(response.data.login)
     if(response.data.login==='ok'){
       localStorage.setItem("status", "authenticated");
+      localStorage.setItem("user",response.data.id)
+      localStorage.setItem("username",response.data.name)
       setStatus("authenticated");
       router.push("/")
     }

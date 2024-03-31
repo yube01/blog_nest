@@ -62,7 +62,9 @@ const login = async(req,res)=>{
         
         res.status(200).json({
             login:'ok',
-            token
+            token,
+            id:user._id,
+            name:name
         });
     } catch (error) {
         console.error("Error logging in:", error);

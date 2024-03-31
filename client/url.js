@@ -1,7 +1,24 @@
-export const url = "http://localhost:9000/"
+const url = "http://localhost:9000/"
 
-export const category = "http://localhost:9000/category/"
+const category = "http://localhost:9000/category/"
 
-export const recent = "http://localhost:9000/recent"
+const recent = "http://localhost:9000/recent"
 
-export const allPost = "http://localhost:9000/allPost/"
+const allPost = "http://localhost:9000/allPost/"
+
+const single = "http://localhost:9000/single/"
+
+const addComment = "http://localhost:9000/addComment/"
+
+const getComment = "http://localhost:9000/getComment/"
+
+
+export {
+    url,
+    category,
+    recent,
+    allPost,
+    single,
+    addComment,
+    getComment
+}
