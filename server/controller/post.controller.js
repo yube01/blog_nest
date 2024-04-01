@@ -42,11 +42,11 @@ const singlePost = async(req,res)=>{
   
 }
 
-const getPost = async (req, res) => {
+const addPost = async (req, res) => {
   try {
-    const { title, desc, slug } = req.body;
+    const { title, desc,img, slug,catSlug } = req.body;
 
-    const userObject = { title, desc, slug };
+    const userObject = { title, desc,img, slug,catSlug };
 
     // Create and store new user
     const user = await Posts.create(userObject);
@@ -60,7 +60,7 @@ const getPost = async (req, res) => {
 };
 
 module.exports = {
-  getPost,
+  addPost,
   recentPost,
   allPost,
   singlePost

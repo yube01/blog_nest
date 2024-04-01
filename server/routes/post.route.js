@@ -1,5 +1,5 @@
 const express = require('express')
-const { getPost, recentPost, allPost, singlePost } = require('../controller/post.controller')
+const { recentPost, allPost, singlePost, addPost } = require('../controller/post.controller')
 
 
 
@@ -10,7 +10,7 @@ const router = express.Router()
 
 
 
-router.post("/postD",getPost)
+router.post("/addPost",addPost)
 router.get("/recent",recentPost)
 router.get("/allPost",allPost)
 router.get("/single/:id",singlePost)

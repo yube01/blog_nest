@@ -13,6 +13,9 @@ const addComment = "http://localhost:9000/addComment/"
 const getComment = "http://localhost:9000/getComment/"
 
 
+const addPost = "http://localhost:9000/addPost"
+
+
 export {
     url,
     category,
@@ -20,5 +23,6 @@ export {
     allPost,
     single,
     addComment,
-    getComment
+    getComment,
+    addPost
 }

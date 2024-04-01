@@ -5,7 +5,7 @@ import styles from "./write.module.css";
 import { useEffect, useState } from "react";
 import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+
 import {
   getStorage,
   ref,
@@ -14,9 +14,11 @@ import {
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
 import ReactQuill from "react-quill";
+import { addPost } from "../../../url";
+import axios from "axios";
 
 const WritePage = () => {
-  const { status } = useSession();
+  const status = localStorage.getItem("status")
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -77,21 +79,22 @@ const WritePage = () => {
       .replace(/[\s_-]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
-  const handleSubmit = async () => {
-    const res = await fetch("/api/posts", {
-      method: "POST",
-      body: JSON.stringify({
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const res = await axios.post(addPost, {
+ 
         title,
         desc: value,
         img: media,
         slug: slugify(title),
         catSlug: catSlug || "style", //If not selected, choose the general category
-      }),
+      
     });
 
+
     if (res.status === 200) {
-      const data = await res.json();
-      router.push(`/posts/${data.slug}`);
+     
+      router.push("/post");
     }
   };
 

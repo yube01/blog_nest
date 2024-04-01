@@ -1,26 +1,32 @@
-import React from "react";
+'use client'
+
+import React, { useEffect, useState } from "react";
 import styles from "./post.module.css";
 // import Pagination from "../pagination/Pagination";
 import Image from "next/image";
 import {allPost} from "../../../url"
 import Card from "@/components/card/Card";
+import axios from "axios";
 
 
-const getData = async () => {
-  const res = await fetch(allPost,{
-      cache: "no-store",
-    }
-  );
 
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+const CardList = () => {
 
-  return res.json();
-};
 
-const CardList = async () => {
-  const data = await getData();
+  const [data,setData] = useState([])
+  
+  useEffect(()=>{
+
+    const getData = async () => {
+      const res = await axios.get(allPost);
+
+      setData(res.data)
+    };
+
+    getData()
+  },[])
+
+  
 
   return (
     <div className={styles.container}>
