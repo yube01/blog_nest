@@ -86,7 +86,7 @@ const WritePage = () => {
         title,
         desc: value,
         img: media,
-        slug: slugify(title),
+        slug: catSlug,
         catSlug: catSlug || "style", //If not selected, choose the general category
       
     });
