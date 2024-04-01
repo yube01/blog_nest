@@ -1,6 +1,6 @@
 
 import styles from "./blogPage.module.css";
-import Menu from "@/components/Menu/Menu";
+import Menu from "@/components/menu/Menu";
 import { recent } from "../../../url";
 import Card from "@/components/card/Card";
 
