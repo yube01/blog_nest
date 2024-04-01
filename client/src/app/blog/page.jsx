@@ -1,4 +1,4 @@
-import CardList from "@/components/cardList/CardList";
+
 import styles from "./blogPage.module.css";
 import Menu from "@/components/Menu/Menu";
 import { recent } from "../../../url";
