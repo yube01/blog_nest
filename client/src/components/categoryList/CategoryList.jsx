@@ -1,25 +1,38 @@
-import React from "react";
+'use client'
+
+import React, { useEffect, useState } from "react";
 import styles from "./catetoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import {category} from "../../../url"
+import axios from "axios";
 
-const getData = async () => {
-  const res = await fetch(category, {
-    cache: "no-store",
-  });
 
- 
 
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+const CategoryList = () => {
 
-  return res.json();
-};
 
-const CategoryList = async () => {
-  const data = await getData();
+  const [data,setData] = useState([])
+
+  useEffect(()=>{
+    const getCategory = async()=>{
+      try {
+
+        const res = await axios.get(category);
+        setData(res.data)
+        console.log(res)
+      
+        
+    } catch (error) {
+        console.log(error)
+        
+    }
+
+    }
+    getCategory()
+  
+
+  },[])
 
   return (
     <div className={styles.container}>

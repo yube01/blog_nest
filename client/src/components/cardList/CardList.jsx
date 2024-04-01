@@ -1,25 +1,36 @@
-import React from "react";
+'use client'
+
+import React, { useEffect, useState } from "react";
 import styles from "./cardList.module.css";
 // import Pagination from "../pagination/Pagination";
 import Image from "next/image";
 import {recent} from "../../../url"
 import Card from "../card/Card";
+import axios from "axios";
 
-const getData = async () => {
 
-    const res = await fetch(recent+`?slug=initial`,{
-      cache: "no-store",
+
+const CardList =  () => {
+  const [data,setData] = useState([])
+
+  useEffect(()=>{
+    const getCard = async()=>{
+      try {
+
+        const res = await axios.get(recent+`?slug=initial`);
+        setData(res.data)
+      
+        
+    } catch (error) {
+        console.log(error)
+        
     }
-  );
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
-  return res.json();
 
-};
+    }
+    getCard()
+  
 
-const CardList = async () => {
-  const data = await getData();
+  },[])
  
 
   return (

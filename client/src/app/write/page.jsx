@@ -3,7 +3,6 @@
 import Image from "next/image";
 import styles from "./write.module.css";
 import { useEffect, useState } from "react";
-import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
 
 import {
@@ -13,12 +12,15 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
-import ReactQuill from "react-quill";
+import dynamic from 'next/dynamic'
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+// import ReactQuill from "react-quill";
 import { addPost } from "../../../url";
 import axios from "axios";
 
 const WritePage = () => {
-  const status = localStorage.getItem("status")
+
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -29,6 +31,7 @@ const WritePage = () => {
   const [catSlug, setCatSlug] = useState("");
 
   useEffect(() => {
+
     const storage = getStorage(app);
     const upload = () => {
       const name = new Date().getTime() + file.name;
@@ -63,21 +66,16 @@ const WritePage = () => {
     file && upload();
   }, [file]);
 
-  if (status === "loading") {
-    return <div className={styles.loading}>Loading...</div>;
-  }
+  useEffect(() => {
+    const status = localStorage.getItem("status");
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, []);
 
-  if (status === "unauthenticated") {
-    router.push("/");
-  }
 
-  const slugify = (str) =>
-    str
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/[\s_-]+/g, "-")
-      .replace(/^-+|-+$/g, "");
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -146,6 +144,7 @@ const WritePage = () => {
           onChange={setValue}
           placeholder="Tell your story..."
         />
+        {/* <input type="text" className={styles.textArea} placeholder="Tell your story" onChange={setValue} value={value}/> */}
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
