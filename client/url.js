@@ -1,19 +1,19 @@
-const url = "http://localhost:9000/"
+const url = "https://blognest-api.vercel.app/"
 
-const category = "http://localhost:9000/category/"
+const category = "https://blognest-api.vercel.app/category/"
 
-const recent = "http://localhost:9000/recent"
+const recent = "https://blognest-api.vercel.app/recent"
 
-const allPost = "http://localhost:9000/allPost/"
+const allPost = "https://blognest-api.vercel.app/allPost/"
 
-const single = "http://localhost:9000/single/"
+const single = "https://blognest-api.vercel.app/single/"
 
-const addComment = "http://localhost:9000/addComment/"
+const addComment = "https://blognest-api.vercel.app/addComment/"
 
-const getComment = "http://localhost:9000/getComment/"
+const getComment = "https://blognest-api.vercel.app/getComment/"
 
 
-const addPost = "http://localhost:9000/addPost"
+const addPost = "https://blognest-api.vercel.app/addPost"
 
 
 export {
